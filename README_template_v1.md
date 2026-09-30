@@ -39,11 +39,11 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| Provider used (Choose one) | **LocationIQ / Mapbox/ OpenWeatherMap other -provide detail** |
-| API Base URL | `_______________________________` |
-| Endpoint for geocoding | `_______________________________` |
+| Provider used (Choose one) | OpenWeatherMap |
+| API Base URL | `http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key}` |
+| Endpoint for geocoding | `reverse` |
 | Endpoint for reverse geocoding | `_______________________________` |
-| Authentication method | `_______________________________` |
+| Authentication method | `API key` |
 | Required query parameters | `_______________________________` |
 | Sample request with latitude/longitude | `_______________________________` |
 | Sample JSON response (formatted example) |  
