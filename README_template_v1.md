@@ -60,15 +60,59 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | API Provider (Choose one) | **OpenWeather, OpenWeatherMap (or other – provide details)** |
-| API Base URL | `_______________________________` |
-| Endpoint for current weather | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
+| API Base URL | `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}` |
+| Endpoint for current weather | `weather` |
+| Authentication method | `API key` |
+| Required query parameters | `lat, lon, appid` |
 | Sample JSON response (formatted example) |  
+```json
+| {
+    "coord": {
+        "lon": 10.99,
+        "lat": 44.34
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 292.9,
+        "feels_like": 292.63,
+        "temp_min": 290.49,
+        "temp_max": 292.96,
+        "pressure": 1026,
+        "humidity": 65,
+        "sea_level": 1026,
+        "grnd_level": 962
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 1.37,
+        "deg": 51,
+        "gust": 5.27
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1790762133,
+    "sys": {
+        "type": 2,
+        "id": 2004688,
+        "country": "IT",
+        "sunrise": 1790745130,
+        "sunset": 1790787595
+    },
+    "timezone": 7200,
+    "id": 3163858,
+    "name": "Zocca",
+    "cod": 200
+}
 ```
-
-```
-|
 
 ---
 
