@@ -25,13 +25,63 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
+| API Base URL | http://api.open-notify.org/astros.json |
 | Endpoint for current ISS location | `_______________________________` |
 | Sample response format (example JSON) |  
-```
-
-```
-|
+{
+    "people": [
+        {
+            "craft": "ISS",
+            "name": "Oleg Kononenko"
+        },
+        {
+            "craft": "ISS",
+            "name": "Nikolai Chub"
+        },
+        {
+            "craft": "ISS",
+            "name": "Tracy Caldwell Dyson"
+        },
+        {
+            "craft": "ISS",
+            "name": "Matthew Dominick"
+        },
+        {
+            "craft": "ISS",
+            "name": "Michael Barratt"
+        },
+        {
+            "craft": "ISS",
+            "name": "Jeanette Epps"
+        },
+        {
+            "craft": "ISS",
+            "name": "Alexander Grebenkin"
+        },
+        {
+            "craft": "ISS",
+            "name": "Butch Wilmore"
+        },
+        {
+            "craft": "ISS",
+            "name": "Sunita Williams"
+        },
+        {
+            "craft": "Tiangong",
+            "name": "Li Guangsu"
+        },
+        {
+            "craft": "Tiangong",
+            "name": "Li Cong"
+        },
+        {
+            "craft": "Tiangong",
+            "name": "Ye Guangfu"
+        }
+    ],
+    "number": 12,
+    "message": "success"
+}
 
 ---
 
@@ -40,10 +90,10 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | Provider used (Choose one) | OpenWeatherMap |
-| API Base URL | `http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key}` |
-| Endpoint for geocoding | `reverse` |
+| API Base URL | http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key} |
+| Endpoint for geocoding | reverse |
 | Endpoint for reverse geocoding | `_______________________________` |
-| Authentication method | `API key` |
+| Authentication method | API key |
 | Required query parameters | `_______________________________` |
 | Sample request with latitude/longitude | `_______________________________` |
 | Sample JSON response (formatted example) |  
