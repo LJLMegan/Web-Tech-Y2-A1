@@ -26,7 +26,7 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | API Base URL | http://api.open-notify.org/astros.json |
-| Endpoint for current ISS location | `_______________________________` |
+| Endpoint for current ISS location | astros.json |
 | Sample response format (example JSON) |  
 {
     "people": [
@@ -90,12 +90,12 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | Provider used (Choose one) | OpenWeatherMap |
-| API Base URL | http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key} |
-| Endpoint for geocoding | reverse |
-| Endpoint for reverse geocoding | `_______________________________` |
+| API Base URL | http://api.openweathermap.org/geo/1.0/zip?zip=E14,GB&appid={API key} |
+| Endpoint for geocoding | /geo/1.0/zip |
+| Endpoint for reverse geocoding |  |
 | Authentication method | API key |
-| Required query parameters | `_______________________________` |
-| Sample request with latitude/longitude | `_______________________________` |
+| Required query parameters | geo/1.0 |
+| Sample request with latitude/longitude |  |
 | Sample JSON response (formatted example) |  
 ```
 
