@@ -224,8 +224,11 @@ Include a **simple block diagram** to illustrate this interaction.
 Explain how REST APIs are used in your AstroBot: 
 
 - Describe how HTTP methods (GET, POST) are used
-  HTTP method GET is used to read the file, an instance of this could include fetching user messages with Webex API.
-  HTTP method POST is used to send data to the server to create new information in the file or web link, an instance of this could be filling in a form.
+
+   HTTP method GET is used to read the file, an instance of this could include fetching user messages with Webex API.
+
+   HTTP method POST is used to send data to the server to create new information in the file or web link, an instance of this could be filling in a form.
+
 - Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)  
 - Describe how JSON responses are received and processed  
 
