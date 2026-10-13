@@ -11,11 +11,11 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
-| Authentication Method | `_______________________________` |
-| Endpoint to list rooms | `_______________________________` |
-| Endpoint to get messages | `_______________________________` |
-| Endpoint to send message | `_______________________________` |
+| API Base URL | https://webexapis.com/v1 |
+| Authentication Method | Bearer Token |
+| Endpoint to list rooms | /rooms |
+| Endpoint to get messages | /messages/{messageId} |
+| Endpoint to send message | /messages/{messageId}|
 | Required headers | `_______________________________` |
 | Sample full GET or POST request | `_______________________________` |
 
@@ -223,7 +223,9 @@ Include a **simple block diagram** to illustrate this interaction.
 
 Explain how REST APIs are used in your AstroBot: 
 
-- Describe how HTTP methods (GET, POST) are used  
+- Describe how HTTP methods (GET, POST) are used
+  HTTP method GET is used to read the file, an instance of this could include fetching user messages with Webex API.
+  HTTP method POST is used to send data to the server to create new information in the file or web link, an instance of this could be filling in a form.
 - Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)  
 - Describe how JSON responses are received and processed  
 
