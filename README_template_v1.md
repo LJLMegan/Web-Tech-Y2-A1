@@ -29,7 +29,14 @@ This investigation sheet helps you gather key technical information from the thr
 | Endpoint for current ISS location | iss-now.json |
 | Sample response format (example JSON) |  
 
-
+{
+  "message": "success",
+  "iss_position": {
+    "latitude": "-45.3588",
+    "longitude": "132.6963"
+  },
+  "timestamp": 1791971100}
+  
 ---
 
 ##  Geocoding API (4 marks)
@@ -44,14 +51,7 @@ This investigation sheet helps you gather key technical information from the thr
 | Required query parameters | geo/1.0 |
 | Sample request with latitude/longitude |  |
 | Sample JSON response (formatted example) |  
-{
-  "message": "success",
-  "iss_position": {
-    "latitude": "-45.3588",
-    "longitude": "132.6963"
-  },
-  "timestamp": 1791971100
-}
+
 |
 
 ---
