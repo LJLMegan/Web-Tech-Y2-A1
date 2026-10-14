@@ -277,13 +277,21 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| Library used | `_______________________________` |
-| Function used to convert epoch | `_______________________________` |
+| Library used | time|
+| Function used to convert epoch | strptime() |
 | Sample code to convert timestamp |  
 ```  
 ```
 |
-| Output (human-readable time) | `_______________________________` |
+| Output (human-readable time) | import time
+from datetime import datetime
+
+# Get current Unix timestamp
+timestamp = int(time.time())
+print(timestamp)  # e.g., 1706745600
+
+# Using datetime
+timestamp = int(datetime.now().timestamp()) |
 
 ---
 
