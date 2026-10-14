@@ -25,63 +25,10 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| API Base URL | http://api.open-notify.org/astros.json |
-| Endpoint for current ISS location | astros.json |
+| API Base URL | http://api.open-notify.org/iss-now.json |
+| Endpoint for current ISS location | iss-now.json |
 | Sample response format (example JSON) |  
-{
-    "people": [
-        {
-            "craft": "ISS",
-            "name": "Oleg Kononenko"
-        },
-        {
-            "craft": "ISS",
-            "name": "Nikolai Chub"
-        },
-        {
-            "craft": "ISS",
-            "name": "Tracy Caldwell Dyson"
-        },
-        {
-            "craft": "ISS",
-            "name": "Matthew Dominick"
-        },
-        {
-            "craft": "ISS",
-            "name": "Michael Barratt"
-        },
-        {
-            "craft": "ISS",
-            "name": "Jeanette Epps"
-        },
-        {
-            "craft": "ISS",
-            "name": "Alexander Grebenkin"
-        },
-        {
-            "craft": "ISS",
-            "name": "Butch Wilmore"
-        },
-        {
-            "craft": "ISS",
-            "name": "Sunita Williams"
-        },
-        {
-            "craft": "Tiangong",
-            "name": "Li Guangsu"
-        },
-        {
-            "craft": "Tiangong",
-            "name": "Li Cong"
-        },
-        {
-            "craft": "Tiangong",
-            "name": "Ye Guangfu"
-        }
-    ],
-    "number": 12,
-    "message": "success"
-}
+
 
 ---
 
@@ -97,9 +44,14 @@ This investigation sheet helps you gather key technical information from the thr
 | Required query parameters | geo/1.0 |
 | Sample request with latitude/longitude |  |
 | Sample JSON response (formatted example) |  
-```
-
-```
+{
+  "message": "success",
+  "iss_position": {
+    "latitude": "-45.3588",
+    "longitude": "132.6963"
+  },
+  "timestamp": 1791971100
+}
 |
 
 ---
@@ -184,14 +136,14 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| API Provider | '_________' |
-| API Base URL | `_______________________________` |
-| Endpoint | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
+| API Provider |open-notify.org |
+| API Base URL | http://api.open-notify.org/astros.json |
+| Endpoint | astros.json |
+| Authentication method | No Input |
+| Required query parameters |  |
 | Sample JSON response (formatted example) |  
-```
 
+{"people": [{"craft": "ISS", "name": "Oleg Kononenko"}, {"craft": "ISS", "name": "Nikolai Chub"}, {"craft": "ISS", "name": "Tracy Caldwell Dyson"}, {"craft": "ISS", "name": "Matthew Dominick"}, {"craft": "ISS", "name": "Michael Barratt"}, {"craft": "ISS", "name": "Jeanette Epps"}, {"craft": "ISS", "name": "Alexander Grebenkin"}, {"craft": "ISS", "name": "Butch Wilmore"}, {"craft": "ISS", "name": "Sunita Williams"}, {"craft": "Tiangong", "name": "Li Guangsu"}, {"craft": "Tiangong", "name": "Li Cong"}, {"craft": "Tiangong", "name": "Ye Guangfu"}], "number": 12, "message": "success"}
 ```
 |
 
