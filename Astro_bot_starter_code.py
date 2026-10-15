@@ -8,10 +8,10 @@
 # REQUIRED LIBRARIES
 # =========================
 
-import #complete the import statement to include the requests library
-import #complete the import statement to include the json library
-import #complete the import statement to include the time library
-from #complete the import statement to include the datetime library
+import requests
+import json 
+import time
+from datetime 
 
 # =========================
 # CONFIGURATION FUNCTIONS
@@ -31,11 +31,11 @@ def get_api_key(prompt, hardcoded_key):
 # WEBEX FUNCTIONS
 # =========================
 def get_rooms(token):
-    url = #complete the URL to fetch rooms from Webex API
+    url = ("https://webexapis.com/v1/rooms")
     headers = #complete the headers dictionary to include the Authorization header with the token
     response = #complete the request to get rooms using requests.get with the url and headers
 
-    if response.status_code != #complete the condition to check if the response status code is not xxx:
+    if response.status_code != 400
         print("Error fetching rooms:", response.status_code)
         return []
 
@@ -49,7 +49,7 @@ def print_rooms(rooms):
 
 def select_room(rooms):
     while True:
-        name = input(#complete the input prompt to ask the user for the room name)
+        name = input("What is your room id?")
         for room in rooms:
             if name.lower() in room["title"].lower():
                 print(#complete the print statement to confirm the selected room)
@@ -58,7 +58,7 @@ def select_room(rooms):
 
 
 def get_latest_message(token, room_id):
-    url = #complete the URL to fetch messages from Webex API
+    url = https://webexapis.com/v1/messages/{messageId}
     params = {"roomId":#complete, "max": #complete}
     headers = #complete the headers dictionary to include the Authorization header with the token
 
@@ -77,7 +77,7 @@ def get_latest_message(token, room_id):
 
 
 def send_message(token, room_id, message):
-    url = #complete the URL to send messages to Webex API
+    url = https://webexapis.com/v1/messages/{messageId}
     headers = #complete the headers dictionary to include the Authorization header with the token and Content-Type as application/json
     data = {
         "roomId": room_id,
@@ -89,8 +89,8 @@ def send_message(token, room_id, message):
 # WEATHER FUNCTIONS
 # =========================
 def get_city_coordinates(city, api_key):
-    url = #complete the URL to fetch city coordinates from OpenWeatherMap API
-    params = #complete the params dictionary to include the city name, limit, and the API key
+    url = https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
+    params = city name, limit, and the API key
     response = requests.#complete(url, params=params)
 
     if response.status_code != 200:
@@ -104,10 +104,10 @@ def get_weather(city, api_key):
     location = get_city_coordinates(city, api_key)
 
     if not location:
-        return #complete the return statement to indicate that the city was not found
+        print("Error fetching location:", response.status_code)
 
-    url = #complete the URL to fetch weather data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, units as metric, and the API key
+    url = https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
+    params = latitude, longitude, and the API key
 
     response = requests.#complete(url, params=params)
 
@@ -137,7 +137,7 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = #complete the URL to fetch ISS current location from the Open Notify API
+    url = http://api.open-notify.org/iss-now.json
 
     response = requests.#complete(#complete)
 
