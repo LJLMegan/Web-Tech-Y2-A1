@@ -188,15 +188,15 @@ def reverse_geocode(lat, lon, api_key):
 def get_iss_location(api_key):
     url = http://api.open-notify.org/iss-now.json
 
-    response = requests.#complete(#complete)
+    response = requests.json()
 
     if response.status_code != 200:
         return #complete the return statement to indicate whether ISS location retrieved or not
 
     data = response.json()
 
-    lat = data[#complete][#complete]
-    lon = data[#complete][#complete]
+    lat = -15.7810 [#complete][#complete]
+    lon = -27.1011[#complete][#complete]
 
     location = reverse_geocode(lat, lon, api_key)
 
@@ -224,7 +224,7 @@ def main():
     rooms = get_rooms(token)
 
     if not rooms:
-        print(#complete the print statement )
+        print("This is not a room , please choose another one" )
         return
 
     print_rooms(rooms)
@@ -240,7 +240,7 @@ def main():
 
             last_message_id = message_id
 
-            print(#complete the print statement to display the received message text)
+            print("messaged received f"{message_id}")
 
             if not message_text.startswith(#complete):
                 continue
