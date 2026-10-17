@@ -25,6 +25,10 @@ def get_webex_token():
         return "Bearer YOUR_WEBEX_TOKEN"
 
 def get_api_key(prompt, hardcoded_key):
+    choice = input("Use hard-coded API key? (y/n): ").lower()
+    if choice == "n":
+        token = input("Enter your hard-coded API key: ")
+        return f"Bearer {token}"
   #complete the function to get the API key from user input or use a hardcoded key
 
 # =========================
@@ -52,7 +56,7 @@ def select_room(rooms):
         name = input("What is your room id?")
         for room in rooms:
             if name.lower() in room["title"].lower():
-                print(#complete the print statement to confirm the selected room)
+                print("is this the right room id?")
                 return room["id"]
         print(#complete the print statement to indicate that the room was not found)
 
@@ -117,6 +121,51 @@ def get_weather(city, api_key):
     weather = response.json()
 
     return (
+        {
+    "coord": {
+        "lon": 10.99,
+        "lat": 44.34
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 292.9,
+        "feels_like": 292.63,
+        "temp_min": 290.49,
+        "temp_max": 292.96,
+        "pressure": 1026,
+        "humidity": 65,
+        "sea_level": 1026,
+        "grnd_level": 962
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 1.37,
+        "deg": 51,
+        "gust": 5.27
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1790762133,
+    "sys": {
+        "type": 2,
+        "id": 2004688,
+        "country": "IT",
+        "sunrise": 1790745130,
+        "sunset": 1790787595
+    },
+    "timezone": 7200,
+    "id": 3163858,
+    "name": "Zocca",
+    "cod": 200
         #complete the return statement to format and return the weather information such as including city name, country, temperature, weather description, humidity, and wind speed
     )
 
@@ -124,8 +173,8 @@ def get_weather(city, api_key):
 # ISS FUNCTIONS
 # =========================
 def reverse_geocode(lat, lon, api_key):
-    url = #complete the URL to fetch reverse geocoding data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, limit, and the API key
+    url = http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key}
+    params = lat=51.5098&lon=-0.1180&limit=5&appid={API key}#complete the params dictionary to include the latitude, longitude, limit, and the API key
 
     response = requests.#complete(url, params=params)
 
