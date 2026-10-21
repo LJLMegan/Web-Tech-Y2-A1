@@ -23,12 +23,14 @@ def get_webex_token():
         return f"Bearer {token}"
     else:
         return "Bearer YOUR_WEBEX_TOKEN"
+get_webex_token()
 
 def get_api_key(prompt, hardcoded_key):
     choice = input("Use hard-coded API key? (y/n): ").lower()
     if choice == "n":
         token = input("Enter your hard-coded API key: ")
         return f"Bearer {token}"
+get_api_key("Enter Weather API key: ", "YOUR_HARDCODED_KEY")
   #complete the function to get the API key from user input or use a hardcoded key
 
 # =========================
