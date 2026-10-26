@@ -11,7 +11,7 @@
 import requests
 import json 
 import time
-from datetime 
+from datetime import datetime,timezone
 
 # =========================
 # CONFIGURATION FUNCTIONS
@@ -22,17 +22,18 @@ def get_webex_token():
         token = input("Enter your Webex Access Token: ")
         return f"Bearer {token}"
     else:
-        return "Bearer YOUR_WEBEX_TOKEN"
+        return "Bearer " # use your own bearer token
 get_webex_token()
 
-def get_api_key(prompt, hardcoded_key):
+def get_api_key(prompt,hardcoded_key):
     choice = input("Use hard-coded API key? (y/n): ").lower()
     if choice == "n":
         token = input("Enter your hard-coded API key: ")
         return f"Bearer {token}"
-get_api_key("Enter Weather API key: ", "YOUR_HARDCODED_KEY")
-  #complete the function to get the API key from user input or use a hardcoded key
-
+    else:
+        return f"Bearer " # use your own api key
+get_api_key(prompt,hardcoded_key)
+""""
 # =========================
 # WEBEX FUNCTIONS
 # =========================
@@ -279,3 +280,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""
