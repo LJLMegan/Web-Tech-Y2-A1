@@ -22,7 +22,7 @@ def get_webex_token():
         token = input("Enter your Webex Access Token: ")
         return f"Bearer {token}"
     else:
-        return "Bearer YOUR_WEBEX_ACCESS_TOKEN"  # enter your hard-coded Webex token here
+        return "Bearer" # complete the return statement to include the hard-coded Webex token"
 get_webex_token()
 
 def get_api_key(prompt,hardcoded_key):
@@ -31,7 +31,7 @@ def get_api_key(prompt,hardcoded_key):
         token = input("Enter your hard-coded API key: ")
         return f"Bearer {token}"
     else:
-        return f"Bearer {hardcoded_key}" # enter your hard-coded API key here
+        return f"Bearer {hardcoded_key}"
 get_api_key(prompt,hardcoded_key)
 
 # =========================
@@ -64,11 +64,11 @@ def select_room(rooms):
 
 
 def get_latest_message(token, room_id):
-    url = https://webexapis.com/v1/messages/{messageId}
-    params = {"roomId":#complete, "max": #complete}
-    headers = #complete the headers dictionary to include the Authorization header with the token
+    url = https://webexapis.com/v1/messages
+    params = {"roomId": room_id, "max": 1}
+    headers = {"Authorization": token}
 
-    response = requests.#complete(#complete, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params)
 
     if response.status_code != 200:
         return None, None
@@ -83,13 +83,16 @@ def get_latest_message(token, room_id):
 
 
 def send_message(token, room_id, message):
-    url = https://webexapis.com/v1/messages/{messageId}
-    headers = #complete the headers dictionary to include the Authorization header with the token and Content-Type as application/json
+    url = https://webexapis.com/v1/messages
+    headers = {"Authorization": token, "Content-Type": "application/json"}
     data = {
         "roomId": room_id,
         "text": message
     }
-    requests.#complete(url, headers=headers, data=json.dumps(data))
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    return response
+
 
 # =========================
 # WEATHER FUNCTIONS
