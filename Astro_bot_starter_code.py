@@ -22,7 +22,7 @@ def get_webex_token():
         token = input("Enter your Webex Access Token: ")
         return f"Bearer {token}"
     else:
-        return "Bearer " # use your own bearer token
+        return "Bearer YOUR_WEBEX_ACCESS_TOKEN"  # enter your hard-coded Webex token here
 get_webex_token()
 
 def get_api_key(prompt,hardcoded_key):
@@ -31,18 +31,18 @@ def get_api_key(prompt,hardcoded_key):
         token = input("Enter your hard-coded API key: ")
         return f"Bearer {token}"
     else:
-        return f"Bearer " # use your own api key
+        return f"Bearer {hardcoded_key}" # enter your hard-coded API key here
 get_api_key(prompt,hardcoded_key)
-""""
+
 # =========================
 # WEBEX FUNCTIONS
 # =========================
 def get_rooms(token):
     url = ("https://webexapis.com/v1/rooms")
-    headers = #complete the headers dictionary to include the Authorization header with the token
-    response = #complete the request to get rooms using requests.get with the url and headers
+    headers = {"Authorization": token}  # complete the headers dictionary to include the Authorization header with the token
+    response = requests.get(url, headers=headers)  # complete the request to get rooms using requests.get with the url and headers
 
-    if response.status_code != 400
+    if response.status_code != 200
         print("Error fetching rooms:", response.status_code)
         return []
 
@@ -51,17 +51,16 @@ def get_rooms(token):
 
 def print_rooms(rooms):
     for room in rooms:
-        print(#complete the print statement to display the room title and id)
-
-
+        print(f"Room Title: {room['title']}, Room ID: {room['id']}")
+"
 def select_room(rooms):
     while True:
         name = input("What is your room id?")
         for room in rooms:
             if name.lower() in room["title"].lower():
-                print("is this the right room id?")
+                print("Room found:", room["title"])
                 return room["id"]
-        print(#complete the print statement to indicate that the room was not found)
+        print("Room not found.")
 
 
 def get_latest_message(token, room_id):
