@@ -20,7 +20,8 @@ import requests
 DEFAULT_WEBEX_TOKEN = "Enter Webex token here"
 DEFAULT_WEATHER_KEY = "Enter API key here"
 
-
+# .strip() is used to remove spaces and tabs at the beginning and end of the string. .lower() is used to convert the string to lowercase for easier comparison.
+# this function prompts the user to choose between using a hard-coded Webex token or entering a new one. It returns the appropriate token in the required format for API requests.
 def get_webex_token():
     choice = input("Use hard-coded Webex token? (y/n): ").strip().lower()
     if choice == "n":
@@ -28,7 +29,7 @@ def get_webex_token():
         return f"Bearer {token}"
     return f"Bearer {DEFAULT_WEBEX_TOKEN}"
 
-
+# this function prompts the user to choose between using a hard-coded API key or entering a new one. It returns the appropriate key in the required format for API requests.
 def get_api_key(prompt, hardcoded_key):
     choice = input(f"Use hard-coded {prompt}? (y/n): ").strip().lower()
     if choice == "n":
@@ -40,6 +41,7 @@ def get_api_key(prompt, hardcoded_key):
 # =========================
 # WEBEX FUNCTIONS
 # =========================
+# this function retrieves the list of rooms from the Webex API using the provided token. It returns a list of room items or an empty list if there is an error.
 def get_rooms(token):
     url = "https://webexapis.com/v1/rooms"
     headers = {"Authorization": token}
@@ -51,12 +53,12 @@ def get_rooms(token):
 
     return response.json().get("items", [])
 
-
+# this function prints the title and ID of each room in the provided list of rooms. It uses the .get() method to safely access dictionary keys, providing default values if keys are missing.
 def print_rooms(rooms):
     for room in rooms:
         print(f"Room Title: {room.get('title', 'Unknown')}, Room ID: {room.get('id', 'Unknown')}")
 
-
+# this function allows the user to select a room by entering its title or ID. It searches through the list of rooms and returns the ID of the matching room. If no match is found, it prompts the user again.
 def select_room(rooms):
     while True:
         name = input("What is your room title or ID? ").strip()
@@ -68,7 +70,7 @@ def select_room(rooms):
                 return room_id
         print("Room not found.")
 
-
+# this function retrieves the latest message from a specified room using the Webex API. It returns the message ID and text of the latest message, or None if there is an error or no messages.
 def get_latest_message(token, room_id):
     url = "https://webexapis.com/v1/messages"
     params = {"roomId": room_id, "max": 1}
@@ -86,7 +88,7 @@ def get_latest_message(token, room_id):
     latest = data[0]
     return latest.get("id"), latest.get("text", "")
 
-
+# this function sends a message to a specific room using the Webex API. It uses the request with the appropriate headers and data, and returns the response from the API.
 def send_message(token, room_id, message):
     url = "https://webexapis.com/v1/messages"
     headers = {"Authorization": token, "Content-Type": "application/json"}
@@ -97,6 +99,7 @@ def send_message(token, room_id, message):
 # =========================
 # WEATHER FUNCTIONS
 # =========================
+# this function gets the geographical coordinates (latitude and longitude) of a specific city using the OpenWeatherMap API. It returns the location data or None if there is an error.
 def get_city_coordinates(city, api_key):
     url = "https://api.openweathermap.org/geo/1.0/direct"
     params = {"q": city, "limit": 1, "appid": api_key}
@@ -109,7 +112,7 @@ def get_city_coordinates(city, api_key):
     data = response.json()
     return data[0] if data else None
 
-
+# this function gets the current weather information for a specific city using the OpenWeatherMap API. It returns a formatted string with the weather details or an error message if there is an issue.
 def get_weather(city, api_key):
     location = get_city_coordinates(city, api_key)
     if not location:
@@ -147,6 +150,7 @@ def get_weather(city, api_key):
 # =========================
 # ISS FUNCTIONS
 # =========================
+# this function uses reverse geocoding to get location details from latitude and longitude using the OpenWeatherMap API.
 def reverse_geocode(lat, lon, api_key):
     url = "https://api.openweathermap.org/geo/1.0/reverse"
     params = {"lat": lat, "lon": lon, "limit": 1, "appid": api_key}
@@ -158,7 +162,7 @@ def reverse_geocode(lat, lon, api_key):
     data = response.json()
     return data[0] if data else None
 
-
+# this function uses the current location of the International Space Station (ISS) using the Open Notify API. It returns a formatted string with the latitude, longitude, place name, and timestamp of the ISS's current position.
 def get_iss_location(api_key):
     url = "http://api.open-notify.org/iss-now.json"
     response = requests.get(url, timeout=10)
@@ -189,6 +193,7 @@ def get_iss_location(api_key):
 # =========================
 # MAIN BOT LOGIC
 # =========================
+# this function is the main entry point of the bot. It handles user input, retrieves messages from the selected room, and processes commands such as /help, /weather, /iss, and /quit.
 def main():
     token = get_webex_token()
     weather_key = get_api_key("Weather API key", DEFAULT_WEATHER_KEY)
