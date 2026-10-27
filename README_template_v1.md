@@ -327,7 +327,16 @@ Explain how the client–server model applies to your AstroBot:
 - Describe how data flows between:
   - User, AstroBot and APIs
 
+Client: Your Python code running locally on your laptop (your local machine).
+
+Testing Tool: Postman (which you used as a client to inspect the raw HTTP responses).
+
+The Servers: The remote API endpoints like Webex and OpenWeather that wait for those requests and send back data.
 Include a **simple block diagram** to illustrate this interaction.
+
+ <img width="731" height="523" alt="image" src="https://github.com/user-attachments/assets/dbfc33ae-aa65-4683-98ef-6e1ff40a8051" />
+
+Data Flow : 
 
 ####  Security Considerations: (3 marks )
 - Consider but not limiting to secure handling of API keys and tokens, API rate limiting, and Input validation (e.g., handling user commands safely), include examples from code where necessary to illustrate.
