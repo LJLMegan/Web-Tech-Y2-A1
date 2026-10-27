@@ -98,12 +98,13 @@ def send_message(token, room_id, message):
 # WEATHER FUNCTIONS
 # =========================
 def get_city_coordinates(city, api_key):
-    url = https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
-    params = city name, limit, and the API key
-    response = requests.#complete(url, params=params)
+    url = "https://api.openweathermap.org/geo/1.0/direct"
+    params = {"q": city, "limit": 1, "appid": api_key}
+    response = requests.get(url, params=params)
 
     if response.status_code != 200:
-        return None
+        print("Error fetching city coordinates:", response.status_code)
+    return None
 
     data = response.json()
     return data[0] if data else None
@@ -115,17 +116,31 @@ def get_weather(city, api_key):
     if not location:
         print("Error fetching location:", response.status_code)
 
-    url = https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
-    params = latitude, longitude, and the API key
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "lat": location["lat"],
+        "lon": location["lon"],
+        "appid": api_key, 
+        "units": "metric"
+    }
 
-    response = requests.#complete(url, params=params)
+    response = requests.get(url, params=params)
+
 
     if response.status_code != 200:
-        return #complete the return statement to indicate that the wheather weather data retrieved or not
+        return "Error fetching weather data:"
 
     weather = response.json()
 
-    return (
+    return(f"Weather for {city_name}, {country}\n"
+
+            f"Temperature: {temperature}°C\n"
+
+            f"Conditions: {description}\n"
+
+            f"Humidity: {humidity}%\n"
+
+            f"Wind speed: {wind_speed} m/s"
         {
     "coord": {
         "lon": 10.99,
@@ -178,10 +193,15 @@ def get_weather(city, api_key):
 # ISS FUNCTIONS
 # =========================
 def reverse_geocode(lat, lon, api_key):
-    url = http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid={API key}
-    params = lat=51.5098&lon=-0.1180&limit=5&appid={API key}#complete the params dictionary to include the latitude, longitude, limit, and the API key
+    url = "http://api.openweathermap.org/geo/1.0/reverse"
+    params = {
+        "lat": lat,
+        "lon": lon,
+        "limit": 1,
+        "appid": api_key
+    }
 
-    response = requests.#complete(url, params=params)
+    response = requests.get(url, params=params)
 
     if response.status_code != 200:
         return None
@@ -191,28 +211,33 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = http://api.open-notify.org/iss-now.json
+    url = "http://api.open-notify.org/iss-now.json"
 
-    response = requests.json()
+    response = requests.get(url)
 
     if response.status_code != 200:
-        return #complete the return statement to indicate whether ISS location retrieved or not
+        return "Error fetching ISS location"
 
     data = response.json()
 
-    lat = -15.7810 [#complete][#complete]
-    lon = -27.1011[#complete][#complete]
+
+    lat = position.get("latitude")
+    lon = position.get("longitude")
 
     location = reverse_geocode(lat, lon, api_key)
 
     place = "Over Ocean / No Nearby City"
 
     if location:
-        place = #
+        place = location.get("name") or location.get("state")
+        or location.get("country") 
 
     return (
-        #complete the return statement to format and return the ISS location information including latitude, longitude, and place name
-    )
+            f"Latitude: {lat}\n"
+            f"Longitude: {lon}\n"
+            f"Place: {place}\n"
+            f"Timestamp: {datetime.fromtimestamp(timestamp, tz=timezone.utc)}"
+        )
 
 # =========================
 # MAIN BOT LOGIC
