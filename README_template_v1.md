@@ -16,7 +16,7 @@ This investigation sheet helps you gather key technical information from the thr
 | Endpoint to list rooms | /rooms |
 | Endpoint to get messages | /messages/{messageId} |
 | Endpoint to send message | /messages/{messageId}|
-| Required headers | `_______________________________` |
+| Required headers | Authorization: Bearer <TOKEN> and Content-Type: application/json. |
 | Sample full GET or POST request | `_______________________________` |
 
 ---
@@ -280,15 +280,18 @@ This investigation sheet helps you gather key technical information from the thr
 | Library used | time|
 | Function used to convert epoch | strptime() |
 | Sample code to convert timestamp |  
-```  
+``` 
+datetime.fromtimestamp(timestamp, tz=timezone.utc) 
 ```
 |
 | Output (human-readable time) | import time
-from datetime import datetime
+from datetime import datetime,timezone
 
 # Get current Unix timestamp
 timestamp = int(time.time())
 print(timestamp)  # e.g., 1706745600
+
+
 
 # Using datetime
 timestamp = int(datetime.now().timestamp()) |
@@ -303,7 +306,7 @@ timestamp = int(datetime.now().timestamp()) |
 | API Base URL | http://api.open-notify.org/astros.json |
 | Endpoint | astros.json |
 | Authentication method | No Input |
-| Required query parameters |  |
+| Required query parameters | None |
 | Sample JSON response (formatted example) |  
 
 {"people": [{"craft": "ISS", "name": "Oleg Kononenko"}, {"craft": "ISS", "name": "Nikolai Chub"}, {"craft": "ISS", "name": "Tracy Caldwell Dyson"}, {"craft": "ISS", "name": "Matthew Dominick"}, {"craft": "ISS", "name": "Michael Barratt"}, {"craft": "ISS", "name": "Jeanette Epps"}, {"craft": "ISS", "name": "Alexander Grebenkin"}, {"craft": "ISS", "name": "Butch Wilmore"}, {"craft": "ISS", "name": "Sunita Williams"}, {"craft": "Tiangong", "name": "Li Guangsu"}, {"craft": "Tiangong", "name": "Li Cong"}, {"craft": "Tiangong", "name": "Ye Guangfu"}], "number": 12, "message": "success"}
@@ -334,14 +337,35 @@ Testing Tool: Postman (which you used as a client to inspect the raw HTTP respon
 The Servers: The remote API endpoints like Webex and OpenWeather that wait for those requests and send back data.
 Include a **simple block diagram** to illustrate this interaction.
 
- <img width="731" height="523" alt="image" src="https://github.com/user-attachments/assets/dbfc33ae-aa65-4683-98ef-6e1ff40a8051" />
+
+
+<img width="731" height="523" alt="image" src="https://github.com/user-attachments/assets/dbfc33ae-aa65-4683-98ef-6e1ff40a8051" />
 
 Data Flow : 
+
+User to AstroBot: The user types a command into the Webex group chat. My example, the group chat is called Megan.
+
+AstroBot to Webex API: AstroBot sends a GET request to Webex to read the user's message.
+
+AstroBot to External APIs: AstroBot checks the command (like /weather <city>) and sends a GET request to OpenWeatherMap for data.
+
+APIs back to AstroBot: The APIs send back  JSON data with the results.
+
+AstroBot back to User: AstroBot takes the values, formats them into a clean message, and uses a POST request to send the reply back to the Webex chat.
 
 ####  Security Considerations: (3 marks )
 - Consider but not limiting to secure handling of API keys and tokens, API rate limiting, and Input validation (e.g., handling user commands safely), include examples from code where necessary to illustrate.
 
----
+Handling API Keys and Tokens:
+
+Security is managed dynamically at runtime using get_webex_token() and get_api_key(). Rather than storing credentials in plain text, these functions prompt the user via input("Enter your Webex Access Token: ").strip().   
+API Rate Limiting:
+
+To protect external servers from excessive requests, the main loop in main() incorporates a polling delay using time.sleep(5). This controls request frequency, avoiding hitting API rate limits or triggering HTTP 429 errors.
+
+Input Validation:
+
+Incoming command strings are sanitized using .strip().lower(). For example, parts[1].strip() cleans up city inputs in the /weather command to remove leading and trailing spaces before building parameters.
 
 ###  RESTful API Usage in Your Application (3 marks )
 
@@ -354,14 +378,23 @@ Explain how REST APIs are used in your AstroBot:
    HTTP method POST is used to send data to the server to create new information in the file or web link, an instance of this could be filling in a form.
 
 - Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)  
+
+Webex API: Retrieves active rooms via get_rooms() ([https://webexapis.com/v1/rooms](https://webexapis.com/v1/rooms)), checks for messages using get_latest_message(), and posts replies using send_message().   
+
+OpenWeatherMap API: Converts city names to geographical coordinates via get_city_coordinates() (/geo/1.0/direct) and fetches weather metrics in get_weather() (/data/2.5/weather).   
+
+Open-Notify (ISS) & Reverse Geocoding API: get_iss_location() fetches real-time coordinates from [http://api.open-notify.org/iss-now.json](http://api.open-notify.org/iss-now.json) and passes the coordinates to reverse_geocode() (/geo/1.0/reverse).
+
 - Describe how JSON responses are received and processed  
+
+Responses are put  into standard Python dictionaries using .json(). The bot extracts values using safe lookup methods like .get("items", []) and dictionary keys such as weather.get("main", {}).get("temp", "N/A") to construct formatted output strings.  
 
 Note: Relate your explanation directly to your code for higher grade. 
 
 #### Security Considerations: (2 marks)
 - Check response status codes, Handling invalid or unexpected API responses, Avoiding excessive API calls
 
----
+Before reading data from an API, my code checks if response.status_code != 200:. This ensures the bot only tries to process information if the server request was successful.
 
 ###  MVC Design Pattern in AstroBot (3 Marks)
 
@@ -370,11 +403,9 @@ Provide a short example based on your implementation
 
 | Component   | Description and Example (Relate to your Bot) |
 |------------|----------------------------------|
-| **Model**  |  |
-| **View**   |  |
-| **Controller** |  |
-
----
+| **Model**  |  The Model handles all the data, such as functions like get_weather() and get_iss_location() fetching data from APIs.
+| **View**   |  The View controls what users see by formatting data into readable text messages and sending them to the Webex chat via send_message()
+| **Controller** |  The Controller is the main logic in main() that responds to user commands (like /weather or /iss) and decides which function to run.
 
 ### 📝 Reflection and Evaluation ( 8 marks )
 
