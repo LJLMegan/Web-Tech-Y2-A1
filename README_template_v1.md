@@ -380,8 +380,20 @@ Provide a short example based on your implementation
 
 Reflect on your AstroBot (400 words):
 
-- How effective is your bot in meeting the Astronomy Club’s needs?  
-- What design decisions worked well?  
+My AstroBot is effective in meeting the Astronomy Club's needs; for example, I used .strip() to remove spaces and tabs at the beginning and end of the string. This makes it more readable for the users of the club. I also used .lower() to make uppercase letters automatically change to lowercase letters. Having this AstroBot automated in a chat room can save time compared to looking it up manually on a browser because, with the commands I made—for example, with /weather <city>—it gets weather information for a city. I have completed a test in the Webex chatroom with this command; although it is effective with cities, it doesn't work well with towns or smaller areas.
+
+I ran into issues with HTTP status codes within the 400 range. I solved them by going on the OpenWeather API. I looked through the documentation and it shows you how to make an API call and the parameters it requires for Postman to complete a GET request. After I understood this, I made the changes to Postman and it came back with an HTTP status code of 200 for OK.
+
+The other API I believe that the Astronomy Club would find useful is "How Many People Are In Space Right Now", and the link for that is [http://api.open-notify.org/astros.json](http://api.open-notify.org/astros.json). I thought that the Astronomy Club would find this useful because not only does this API return the current number of people in space, but additionally, it is also known to return the names and spacecraft those people are on.
+
+Breaking up my code into separate functions (like get_webex_token(), get_rooms(), get_api_key()) helped me keep the code organized compared to putting everything in one massive block, because not only can I work on the separate functions one block at a time, but it also makes it easier to read with comments separating each block of code and explaining the usage and the reason behind specific functions.
+
+Additionally, a future improvement to the effectiveness of the AstroBot is to input more areas, such as rural areas or towns, rather than being limited to just cities. This is in terms of /weather <city>.
+
+I also added comments above my functions or blocks of code not only because if the bot broke then the club would understand the reasoning behind the logic of the code and how to fix it but also to help clarify some functions.
+
+
+
 - What challenges did you face when integrating APIs?  
 - What security risks did you identify and how were they handled?  
 - How could your solution be improved in the future?  
