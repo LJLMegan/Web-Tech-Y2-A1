@@ -337,10 +337,6 @@ Testing Tool: Postman (which you used as a client to inspect the raw HTTP respon
 The Servers: The remote API endpoints like Webex and OpenWeather that wait for those requests and send back data.
 Include a **simple block diagram** to illustrate this interaction.
 
-
-
-<img width="731" height="523" alt="image" src="https://github.com/user-attachments/assets/dbfc33ae-aa65-4683-98ef-6e1ff40a8051" />
-
 Data Flow : 
 
 User to AstroBot: The user types a command into the Webex group chat. My example, the group chat is called Megan.
