@@ -189,6 +189,30 @@ def get_iss_location(api_key):
         f"Timestamp: {datetime.fromtimestamp(timestamp, tz=timezone.utc)}"
     )
 
+#Extended Feature: This function gets the number of people currently in space and their spacecraft from the Open Notify API. 
+#It returns a formatted string with the number of astronauts and their details.
+
+# this function gets the number of people currently in space and their spacecraft from the Open Notify API.
+def get_people_in_space():
+    url = "http://api.open-notify.org/astros.json"
+    response = requests.get(url, timeout=10)
+
+    if response.status_code != 200:
+        return "Error fetching the people currently in space."
+
+    data = response.json()
+    people = data.get("people", [])
+    number = data.get("number", len(people))  # Use the API's total, or count the people if it's missing.
+    people_list = []
+    for person in people:
+        name = person.get("name", "Unknown")
+        craft = person.get("craft", "Unknown")
+        # Add each person's name and spacecraft to the response.
+        people_list.append(f"{name} - {craft}")
+
+    # Join the astronaut details into one message, with each person on a new line.
+    return f"People currently in space: {number}\n" + "\n".join(people_list)
+
 
 # =========================
 # MAIN BOT LOGIC
@@ -228,6 +252,7 @@ def main():
                     "/help - Show this help message\n"
                     "/weather <city> - Get weather information for a city\n"
                     "/iss - Get the current location of the ISS\n"
+                    "/astronauts - List people currently in space\n"
                     "/quit - Shut down the bot\n"
                 )
 
@@ -241,6 +266,9 @@ def main():
 
             elif command == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
+
+            elif command == "/astronauts":
+                send_message(token, room_id, get_people_in_space())
 
             elif command == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
